@@ -1,0 +1,6 @@
+RewriteEngine On
+DirectoryIndex app/1.0/login.html
+RewriteRule ^dashboard$ app/1.0/dashboard.html
+RewriteRule ^register$ app/1.0/register.html
+RewriteRule v1.0/login api/1.0/login.php
+RewriteRule v1.0/register api/1.0/register.php
