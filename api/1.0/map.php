@@ -15,10 +15,22 @@ $map = new map_database_adapter($connection);
 
 require_once("response.php");
 
-if ($_GET["action"] = "get_all") {
+if ($_GET["action"] == "get_all") {
     $response = new response($map->get_all());
     
     echo($response->parse());
 }
+
+if ($_GET["action"] == "get") {
+    try {
+        $response = new response($map->get($_GET["what"]));
+
+        echo($response->parse());
+    } catch (Exception $exception) {
+        $response = new response($exception->getMessage(), false);
+
+        echo($response->parse());
+    }
+}   
 
 ?>

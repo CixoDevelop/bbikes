@@ -1,0 +1,35 @@
+.container {
+    position: absolute;
+    top: 60px;
+    left:0px;
+    width: 100%;
+}
+
+.container .side {
+    width: calc(50% - 40px);
+    padding: 20px;
+    float: left;
+}
+
+.container .side:first-child {
+    text-align: center;
+}
+
+.container .side:last-child {
+    text-align: justify;
+}
+
+.level {
+    width: 30%;
+}
+
+.level1, .level2, .level3 {
+    opacity: 0.05;
+}
+
+@media only screen and (max-width: 800px) {
+    .container .side {
+        width: calc(100% - 40px);
+        padding: 20px;
+    }
+}

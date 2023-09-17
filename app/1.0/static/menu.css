@@ -1,0 +1,32 @@
+@IMPORT URL('HTTPS://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
+body {
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    font-family: 'Oxygen', sans-serif;
+}
+
+.menu {
+    background-color: #edebd7;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 100;
+}
+
+.menu img {
+    height: 40px;
+    padding: 10px;
+    float: right;
+}
+
+.menu img:first-child {
+    float: left;
+    height: 60px;
+    padding: 0px;
+    padding-left: 20px;
+}
+
+

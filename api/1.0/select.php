@@ -36,7 +36,12 @@ if (!isset($_GET["select"])) {
 $user = new user_database_adapter($connection);
 
 try {
-    $user->select($_GET["apikey"], $_GET["select"]);
+    if ($_GET["select"] == "null") {
+        $user->unselect($_GET["apikey"]);
+    } else {
+        $user->select($_GET["apikey"], $_GET["select"]);
+    }
+    
     $response = new response($_GET["select"]);
 
     echo($response->parse());

@@ -51,6 +51,8 @@ class user_database_adapter {
         return $key;
     }
 
+    
+
     public function register(
         string $login, 
         string $password, 
@@ -97,6 +99,18 @@ class user_database_adapter {
         return $user["apikey"];
     }
 
+    public function unselect(string $apikey) {
+        $query = "update users set current = NULL where apikey = ? ";
+
+        $binding = $this->connection->prepare($query);
+        $binding->bind_param("s", $apikey);
+
+        if (!$binding->execute()) {
+            throw new Exception("Error while unselecting route for user");
+        }
+
+    }
+
     public function select(string $apikey, int $select) {
         $query = "update users set current = ? where apikey = ? ";
 
@@ -108,9 +122,8 @@ class user_database_adapter {
         }
     }
 
-
     public function get(string $apikey) : array {
-        $query = "select login, current, email, privileges from users ";
+        $query = "select points, login, current, email, privileges from users ";
         $query .= "where apikey = ?";
 
         $binding = $this->connection->prepare($query);
