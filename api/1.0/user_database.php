@@ -97,6 +97,38 @@ class user_database_adapter {
         return $user["apikey"];
     }
 
+    public function select(string $apikey, int $select) {
+        $query = "update users set current = ? where apikey = ? ";
+
+        $binding = $this->connection->prepare($query);
+        $binding->bind_param("is", $select, $apikey);
+
+        if (!$binding->execute()) {
+            throw new Exception("Error while selecting route for user");
+        }
+    }
+
+
+    public function get(string $apikey) : array {
+        $query = "select login, current, email, privileges from users ";
+        $query .= "where apikey = ?";
+
+        $binding = $this->connection->prepare($query);
+        $binding->bind_param("s", $apikey);
+
+        if (!$binding->execute()) {
+            throw new Exception("Error while getting user");
+        }
+
+        $user = $binding->get_result()->fetch_assoc();
+
+        if (empty($user)) {
+            throw new Exception("User with apikey ".$apikey." not exists");
+        }
+
+        return $user;
+    }
+
     private function password(string $payload) : string {
         return hash("sha256", $payload);
     }

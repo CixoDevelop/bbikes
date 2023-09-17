@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
 body {
     margin: 0px;
     padding: 0px;
     font-size: 16px;
-    
+    font-family: 'Oxygen', sans-serif;
 }
 
 .menu {
@@ -31,4 +33,55 @@ body {
     height: calc(100vh - 80px);
     left: 30%;
     width: 70%;
+}
+
+.routes {
+    position: fixed;
+    top: 80px;
+    height: calc(100vh - 80px);
+    left: 0px;
+    width: 30%;
+}
+
+.routes .route {
+    border-top: 3px solid #edebd7;
+    border-bottom: 3px solid #edebd7;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.routes .name, .routes .level {
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.routes .length, .routes .tilt, .routes .level {
+    display: inline;
+    margin-left: 20px;
+}
+
+.routes .level1 {
+    color: green;
+}
+
+.routes .level2 {
+    color: orange;
+}
+
+.routes .level3 {
+    color: red;
+}
+
+input[type='button'] {
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: green;
+    padding: 10px 20px 10px 20px;
+    transition: background-color 0.5s;
+    margin: 10px;
+}
+
+input[type="button"]:hover {
+    background-color: gray;
 }
