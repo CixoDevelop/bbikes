@@ -9,6 +9,19 @@ class user_database_adapter {
         }
     }
 
+    public function add_points(string $apikey, int $count) {
+        $user = $this->get($apikey);
+        $user["points"] += $count;
+
+        $query = "update users set points = ? where apikey = ?";
+        $binding = $this->connection->prepare($query);
+        $binding->bind_param("is", $user["points"], $apikey);
+
+        if (!$binding->execute()) {
+            throw new Exception("Error while adding points!");
+        }
+    }
+
     private function apikey_exists(string $key) : bool {
         $query = "select login from users where apikey = ?";
         $binding = $this->connection->prepare($query);
@@ -51,15 +64,13 @@ class user_database_adapter {
         return $key;
     }
 
-    
-
     public function register(
         string $login, 
         string $password, 
         string $email
     ) : string {
-        $query = "insert into users(login, password, apikey, email) ";
-        $query .= "values (?, ?, ?, ?)";
+        $query = "insert into users(login, password, apikey, email, points) ";
+        $query .= "values (?, ?, ?, ?, 0)";
         $hashed = $this->password($password);    
         $apikey = $this->generate_apikey();
     

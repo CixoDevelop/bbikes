@@ -13,6 +13,7 @@ $connection = new mysqli(
 );
 
 require_once("user_database.php");
+require_once("map_database.php");
 require_once("response.php");
 
 if (!isset($_GET["apikey"])) {
@@ -31,15 +32,15 @@ if (!isset($_GET["select"])) {
     exit();
 }
 
-
-
 $user = new user_database_adapter($connection);
+$map = new map_database_adapter($connection);
 
 try {
     if ($_GET["select"] == "null") {
         $user->unselect($_GET["apikey"]);
     } else {
         $user->select($_GET["apikey"], $_GET["select"]);
+        $user->add_points($_GET["apikey"], $map->get($_GET["select"])["level"]);
     }
     
     $response = new response($_GET["select"]);
@@ -50,4 +51,5 @@ try {
 
     echo($response->parse());
 }
+
 ?>

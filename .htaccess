@@ -2,5 +2,10 @@ RewriteEngine On
 DirectoryIndex app/1.0/login.html
 RewriteRule ^dashboard$ app/1.0/dashboard.html
 RewriteRule ^register$ app/1.0/register.html
+RewriteRule ^person$ app/1.0/person.html
 RewriteRule v1.0/login api/1.0/login.php
 RewriteRule v1.0/register api/1.0/register.php
+RewriteRule v1.0/user/get api/1.0/get.php
+RewriteRule v1.0/user/select api/1.0/select.php
+RewriteRule v1.0/map/get/([0-9]+) api/1.0/map.php?action=get&what=$1
+RewriteRule v1.0/map/all api/1.0/map.php?action=get_all
